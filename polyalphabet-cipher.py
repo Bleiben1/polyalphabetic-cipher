@@ -11,36 +11,42 @@ from collections import Counter
 #
 ##--------------
 
-def decrypt(keyword,inputfile,outputfile):
-    if outputfile != 'none':
-        archivo = open (output,"w")
+inputfile = ''
+outputfile = ''
+metodo = ''
+keyword = ''
+
+def decrypt(llave,ifile,ofile):
+    if ofile != 'none':
+        archivo = open(ofile,"w")
     
-    with open(inputfile) as mensaje
+    with open(ifile) as mensaje:
         for line in mensaje:
             key = 0
             for c in line:
-                diferencia = (ord(c) - ord(keyword[key]))
+                diferencia = (ord(c) - ord(llave[key]))
                 if diferencia == 0:
                     chLetra = 'z'
                 elif diferencia > 0:
                     chLetra = chr(96 + diferencia)
                 else:
                     chLetra = chr(122 + diferencia)
-                if key == 5:
+                if key == (len(llave)-1):
                     key = 0
                 else:
                     key = key + 1
-                if outputfile != 'none':
+                if ofile != 'none':
                     archivo.write(chLetra)
                 else:
                     print chLetra,
-    if outputfile != 'none':
+    if ofile != 'none':
         archivo.close()
         print 'Status : COMPLETED'
 
 def main(argv):
+    
     try:
-        opts, args = getopt.getopt(argv, "hk:i:o:cd", ["keyword","ifile=","ofile="])
+        opts, args = getopt.getopt(argv, "hi:o:cd", ["keyword=","ifile=","ofile="])
     except getopt.GetoptError:
         print 'polyalphabetic-cipher.py -<metodo> -k <keyword> -i <inputfile> -o <outputfile OR "none">'
         sys.exit(2)
@@ -63,34 +69,3 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-
-#def main(argv):
-#    llave = 'd,a,g,g,e,r'
-    #llave = 'c,r,u,c,i,f,i,x'
-    #llave = 'c,r,o,s,s'
-    #llave = 'c,h,r,i,s,t'
-    
-#    llave = llave.split(',')
-#    puerta = 'puerta.txt'
-    
-#    letranueva = ''
-#    with open(puerta) as puertafile:
-#        for line in puertafile:
-#            key = 0
-#            for c in line:
-#                diferencia = (ord(c) - ord(llave[key]))
-#                if diferencia == 0:
-#                    chLetra = 'z'
-#                elif diferencia > 0:
-#                    chLetra = chr(96 + diferencia)
-#                else:
-#                    chLetra = chr(122 + diferencia)
-#                if key == 5:
-#                    key = 0
-#                else:
-#                    key = key + 1
-#                print chLetra,
-
-
-#if __name__ == "__main__":
-#    main(sys.argv[1:])
