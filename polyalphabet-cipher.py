@@ -26,11 +26,11 @@ def decrypt(llave,ifile,ofile):
             for c in line:
                 diferencia = (ord(c) - ord(llave[key]))
                 if diferencia == 0:
-                    chLetra = 'z'
+                    chLetra = 'a'
                 elif diferencia > 0:
-                    chLetra = chr(96 + diferencia)
+                    chLetra = chr(97 + diferencia)
                 else:
-                    chLetra = chr(122 + diferencia)
+                    chLetra = chr(123 + diferencia)
                 if key == (len(llave)-1):
                     key = 0
                 else:
